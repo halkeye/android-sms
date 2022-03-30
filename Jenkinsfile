@@ -14,27 +14,27 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        // git branch: 'main', url: 'https://gitlab.com/beeper/android-sms'
-        checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [[$class: 'SubmoduleOption', disableSubmodules: false, parentCredentials: false, recursiveSubmodules: true, reference: '', trackingSubmodules: false]], userRemoteConfigs: [[url: 'git branch: \'main\', url: \'https://gitlab.com/beeper/android-sms\'']]])
+        git branch: 'main', url: 'https://gitlab.com/beeper/android-sms.git'
+        sh 'git submodule init && git submodule update'
       }
     }
     stage('build') {
       steps {
-        sh('./mautrix.sh')
+        sh './mautrix.sh'
       }
     }
 
     stage('configure') {
       steps {
-        sh('mkdir -p app/src/main/assets/')
-        sh('curl -qs https://github.com/mautrix/imessage/blob/master/example-config.yaml > app/src/main/assets/config.yaml')
+        sh 'mkdir -p app/src/main/assets/'
+        sh 'curl -qs https://github.com/mautrix/imessage/blob/master/example-config.yaml > app/src/main/assets/config.yaml'
       }
     }
 
     stage('package') {
       steps {
-        sh('./gradlew package')
-        sh('find')
+        sh './gradlew package'
+        sh 'find'
       }
     }
   }
