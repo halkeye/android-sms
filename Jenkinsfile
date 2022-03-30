@@ -1,8 +1,11 @@
 pipeline {
   agent {
     docker {
-      image "bitriseio/android-ndk"
+      image "bitriseio/android-ndk:v2021_05_29-08_17-b2417"
     }
+  }
+  environment {
+    NDK_ROOT="/opt/android-ndk"
   }
   options {
     skipDefaultCheckout()
@@ -20,21 +23,28 @@ pipeline {
     }
     stage('build') {
       steps {
-        sh './mautrix.sh'
+        sh '''
+          curl -qs https://raw.githubusercontent.com/halkeye/android-sms/main/mautrix.sh > mautrix.sh
+          bash -x ./new-mautrix.sh
+        '''
       }
     }
 
     stage('configure') {
       steps {
-        sh 'mkdir -p app/src/main/assets/'
-        sh 'curl -qs https://github.com/mautrix/imessage/blob/master/example-config.yaml > app/src/main/assets/config.yaml'
+        sh '''
+          mkdir -p app/src/main/assets/
+          curl -qs https://github.com/mautrix/imessage/blob/master/example-config.yaml > app/src/main/assets/config.yaml
+        '''
       }
     }
 
     stage('package') {
       steps {
-        sh './gradlew package'
-        sh 'find'
+        sh '''
+          ./gradlew package
+          find
+        '''
       }
     }
   }
