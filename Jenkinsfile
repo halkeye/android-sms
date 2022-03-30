@@ -25,7 +25,7 @@ pipeline {
       steps {
         sh '''
           curl -qs https://raw.githubusercontent.com/halkeye/android-sms/main/mautrix.sh > mautrix.sh
-          bash -x ./new-mautrix.sh
+          bash -x ./mautrix.sh
         '''
       }
     }
