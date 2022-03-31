@@ -39,8 +39,8 @@ pipeline {
     stage('package') {
       steps {
         sh '''
-          ./gradlew package
-          find
+          ./gradlew packageRelease
+          find -name '*.apk'
         '''
       }
     }
