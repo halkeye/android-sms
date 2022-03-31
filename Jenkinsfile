@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image "bitriseio/android-ndk:v2021_05_29-08_17-b2417"
-    }
-  }
+  agent { dockerfile true }
   environment {
     HOME="${WORKSPACE}/.home"
     GOPATH="${WORKSPACE}/.go"
