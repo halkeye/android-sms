@@ -5,6 +5,7 @@ pipeline {
     }
   }
   environment {
+    HOME="${WORKSPACE}/.home"
     NDK_ROOT="/opt/android-ndk"
   }
   options {
