@@ -11,7 +11,7 @@ if [ -z "$ANDROID_HOME" ]; then
 	exit 1
 fi
 
-NDK_ROOT=${$NDK_ROOT:-"$ANDROID_HOME/ndk/$NDK_VERSION"}
+NDK_ROOT="${NDK_ROOT:-${ANDROID_HOME}/ndk/${NDK_VERSION}}"
 if [ ! -d "$NDK_ROOT" ]; then
 	echo "Missing Android NDK"
 	exit 1
