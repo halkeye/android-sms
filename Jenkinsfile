@@ -6,7 +6,6 @@ pipeline {
     NDK_ROOT="/opt/android-ndk"
   }
   options {
-    skipDefaultCheckout()
     timeout(time: 60, unit: 'MINUTES')
     ansiColor('xterm')
     disableConcurrentBuilds(abortPrevious: true)
