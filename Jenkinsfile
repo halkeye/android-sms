@@ -6,6 +6,7 @@ pipeline {
   }
   environment {
     HOME="${WORKSPACE}/.home"
+    GOPATH="${WORKSPACE}/.go"
     NDK_ROOT="/opt/android-ndk"
   }
   options {
