@@ -42,8 +42,7 @@ pipeline {
           ./gradlew packageRelease
           find -name '*.apk'
         '''
-        archiveArtifacts('./app/build/outputs/apk/release/app-release-unsigned.apk')
-
+        archiveArtifacts('app/build/outputs/apk/release/app-release-unsigned.apk')
       }
     }
   }
